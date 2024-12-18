@@ -1,0 +1,32 @@
+name: Deployment
+
+on:
+  workflow_call:
+    inputs:
+      target:
+        description: 'Deployment target environment (dev, stage, prod)'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js (if using Node.js, adjust according to your needs)
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Deploy to ${{ inputs.target }}
+      run: |
+        echo "Deploying to ${{ inputs.target }} environment"
+        # Here you would put your actual deployment script or commands for ${{ inputs.target }}.
+        # For example, if you have a custom deploy script, you can run:
+        # ./deploy-scripts/deploy.sh ${{ inputs.target }}
+
+        # For demonstration purposes, we'll just echo the environment name
+        echo "Deployment to ${{ inputs.target }} is complete!"
